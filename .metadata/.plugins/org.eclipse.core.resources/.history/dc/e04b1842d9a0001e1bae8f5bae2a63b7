@@ -1,0 +1,125 @@
+package br.com.alura.banheiro;
+
+public class Banheiro {
+	
+	private boolean ehSujo =  true;
+	
+	public void fazNumero1() {
+		
+		//Recupera o nome da thread.
+		String nome = Thread.currentThread().getName(); 
+		
+		System.out.println(nome + " batendo na porta");
+		
+		//Sincronização para evitar o acesso ao recurso ao mesmo tempo (chave do banheiro).
+		synchronized(this) {
+		
+			System.out.println(nome + " entrando no banheiro");
+			
+			if (ehSujo) {
+				esperaLaFora(nome);
+			}
+			
+			System.out.println(nome + " fazendo coisa rápida");
+			
+			try {
+				Thread.sleep(5000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			this.ehSujo = true;
+			
+			System.out.println(nome + " dando descarga");
+			System.out.println(nome + " lavando a mão");
+			System.out.println(nome + " saindo do banheiro");
+		
+		}
+		
+	}
+	
+	public void limpa() {
+		
+		//Recupera o nome da thread.
+				String nome = Thread.currentThread().getName(); 
+				
+				System.out.println(nome + " batendo na porta");
+				
+				//Sincronização para evitar o acesso ao recurso ao mesmo tempo (chave do banheiro).
+				synchronized(this) {
+				
+					System.out.println(nome + " entrando no banheiro");
+					
+					if(!ehSujo) {
+						System.out.println(nome + ", não está sujo, vou sair ");
+						return;
+					}
+					
+					System.out.println(nome + " limpando banheiro");
+					this.ehSujo = false;
+					
+					try {
+						Thread.sleep(13000);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					
+					this.notifyAll();
+					
+					System.out.println(nome + " saindo do banheiro");
+					
+				}		
+		
+	
+	}
+
+	private void esperaLaFora(String nome) {
+		System.out.println(nome + " banheiro sujo	");
+		try {
+			this.wait();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+    public void fazNumero2() {
+    	
+    	//Recupera o nome da thread.
+    	String nome = Thread.currentThread().getName(); 
+    	
+    	System.out.println(nome + " batendo na porta");
+    	
+    	//Chave mutex = this abaixo.
+    	synchronized(this) {
+    	
+	    	System.out.println(nome + " entrando no banheiro");
+	    	
+	    	if (ehSujo) {
+				esperaLaFora(nome);
+			}
+	    	
+			System.out.println(nome + " fazendo coisa demorada");
+			
+			dormeUmPouco();
+			
+			this.ehSujo = true;
+			
+			System.out.println(nome + " dando descarga");
+			System.out.println(nome + " lavando a mão");
+			System.out.println(nome + " saindo do banheiro");
+		
+    	}
+	}
+
+	private void dormeUmPouco(Long millis) {
+		try {
+			Thread.sleep(millis);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}

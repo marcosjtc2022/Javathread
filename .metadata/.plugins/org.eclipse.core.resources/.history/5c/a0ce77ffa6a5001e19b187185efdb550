@@ -1,0 +1,11 @@
+package br.com.alura.banco;
+
+public class TarefaAcssaBanco implements Runnable {
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+
+	}
+
+}

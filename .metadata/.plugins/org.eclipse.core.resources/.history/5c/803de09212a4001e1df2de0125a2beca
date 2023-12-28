@@ -1,0 +1,17 @@
+package br.com.alura.lista;
+
+public class TarefaImprimir implements Runnable   {
+	
+	public TarefaImprimir(Lista lista) {
+		// TODO Auto-generated constructor stub
+	}
+
+	@Override
+	public void run() {
+	
+		for (int i = 0; i < lista.tamanho(); i++) {
+			System.out.println(lista.pegaElemento(i));
+		}
+	}
+
+}

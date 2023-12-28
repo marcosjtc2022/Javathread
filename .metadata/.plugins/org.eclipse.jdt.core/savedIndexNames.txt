@@ -1,0 +1,6 @@
+INDEX VERSION 1.131+C:\sistemas\curso-thread-1\.metadata\.plugins\org.eclipse.jdt.core
+2504645443.index
+2101475421.index
+1865797976.index
+3710289118.index
+1233022464.index

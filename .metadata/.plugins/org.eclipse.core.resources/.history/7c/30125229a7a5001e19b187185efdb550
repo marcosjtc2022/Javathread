@@ -1,0 +1,11 @@
+package br.com.alura.banco;
+
+public class TarefaAcessaBanco implements Runnable {
+
+	@Override
+	public void run() {
+		
+
+	}
+
+}
